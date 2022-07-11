@@ -20,7 +20,7 @@ shadowJar {
     archiveVersion.set('0.1')
     archiveClassifier.set('')
     manifest {
-        attributes 'Main-Class':'org.gradle.Main'
+        attributes 'Main-Class':'org.gradle.HelloOtus'
     }
 }
 

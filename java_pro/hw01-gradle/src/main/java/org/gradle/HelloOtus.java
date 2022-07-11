@@ -5,7 +5,7 @@ import com.google.common.collect.Multiset;
 
 import java.util.List;
 
-public class Main {
+public class HelloOtus {
     public static void main(String[] args) {
         Multiset<String> multiset = HashMultiset.create(
                 List.of("Gradle, let's be friends!", "Hello Java!"));
