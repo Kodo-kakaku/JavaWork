@@ -1,4 +1,4 @@
-package org.gradle;
+package ru.otus;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;

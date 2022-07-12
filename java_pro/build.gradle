@@ -15,7 +15,7 @@ idea {
 }
 
 allprojects {
-    group = 'org.javapro'
+    group = 'ru.otus'
     repositories {
         mavenCentral()
         google()
