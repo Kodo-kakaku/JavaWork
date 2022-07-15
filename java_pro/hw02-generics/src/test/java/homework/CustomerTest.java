@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class CustomerTest {
+class  CustomerTest {
 
     // Все тесты должны проходить, менять тесты не надо.
 

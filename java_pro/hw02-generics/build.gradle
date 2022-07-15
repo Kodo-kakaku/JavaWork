@@ -5,13 +5,12 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
-// TODO Versions?
 dependencies {
     testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.0")
     testImplementation ("org.junit.jupiter:junit-jupiter-engine:5.7.0")
-    testImplementation ("org.assertj:assertj-core")
-    testImplementation ("org.mockito:mockito-core")
-    testImplementation ("org.mockito:mockito-junit-jupiter")
+    testImplementation ("org.assertj:assertj-core:3.22.0")
+    testImplementation ("org.mockito:mockito-core:4.4.0")
+    testImplementation ("org.mockito:mockito-junit-jupiter:4.4.0")
 }
 
 test {
