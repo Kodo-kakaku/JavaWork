@@ -18,6 +18,7 @@ allprojects {
     group = 'ru.otus'
     repositories {
         mavenCentral()
+        mavenLocal()
         google()
     }
     apply plugin: "io.spring.dependency-management"
