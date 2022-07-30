@@ -4,46 +4,63 @@ import ru.otus.annotation.After;
 import ru.otus.annotation.Before;
 import ru.otus.annotation.Test;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
+import java.util.ArrayList;
 
 public class TestStarter {
-    public static void start(String classname) throws ClassNotFoundException {
-        AtomicInteger pass = new AtomicInteger();
-        AtomicInteger fail = new AtomicInteger();
+    private static Class<?> aClass;
+    private static int testPass;
+    private static int testFail;
+    private final ArrayList<Method> before;
+    private final ArrayList<Method> test;
+    private final ArrayList<Method> after;
 
-        Class<?> aClass = Class.forName(classname);
-        Method[] methods = aClass.getMethods();
+    public TestStarter(String className) throws ClassNotFoundException {
+        aClass = Class.forName(className);
+        this.before = new ArrayList<>();
+        this.test   = new ArrayList<>();
+        this.after  = new ArrayList<>();
+    }
 
-        Method[][] allPresentMethods = {
-                Arrays.stream(methods)
-                        .filter(x -> x.isAnnotationPresent(Before.class))
-                        .toArray(Method[]::new),
-                Arrays.stream(methods)
-                        .filter(x -> x.isAnnotationPresent(Test.class))
-                        .toArray(Method[]::new),
-                Arrays.stream(methods)
-                        .filter(x -> x.isAnnotationPresent(After.class))
-                        .toArray(Method[]::new)
-        };
+    public void run() {
+        Method[] allMethods = aClass.getMethods();
+        groupMethods(allMethods);
+        runTest(before);
+        runTest(test);
+        runTest(after);
+    }
 
-        Arrays.stream(allPresentMethods)
-                .flatMap(Stream::of)
-                .forEach(method -> {
-                    try {
-                        Object newInstance = aClass.getDeclaredConstructors()[0].newInstance();
-                        method.invoke(newInstance);
-                        pass.getAndIncrement();
-                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                        e.printStackTrace();
-                        fail.getAndIncrement();
-                    }
-                });
+    public void printResults() {
+        System.out.printf("TOTAL = %d \nFAILED = %d \nPASSED = %d%n",
+                testFail + testPass, testFail, testPass);
+    }
 
-        System.out.printf("TOTAL = %s \nFAILED = %s \nPASSED = %s%n",
-                fail.get() + pass.get(), fail.get(), pass.get());
+    private void groupMethods(Method[] allMethods) {
+        for(Method method : allMethods) {
+            if(method.isAnnotationPresent(Before.class)) {
+                before.add(method);
+            }
+            else if(method.isAnnotationPresent(Test.class)) {
+                test.add(method);
+            }
+            else if(method.isAnnotationPresent(After.class)) {
+                after.add(method);
+            }
+        }
+    }
+
+    private static void runTest(ArrayList<Method> methods) {
+        for(Method method : methods) {
+            try {
+                Object newInstance = aClass.getDeclaredConstructors()[0].newInstance();
+                method.invoke(newInstance);
+                testPass++;
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+                testFail++;
+            }
+        }
     }
 }
