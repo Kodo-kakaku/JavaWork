@@ -4,18 +4,18 @@ import ru.otus.annotation.After;
 import ru.otus.annotation.Before;
 import ru.otus.annotation.Test;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TestStarter {
     private static Class<?> aClass;
     private static int testPass;
     private static int testFail;
-    private final ArrayList<Method> before;
-    private final ArrayList<Method> test;
-    private final ArrayList<Method> after;
+    private final List<Method> before;
+    private final List<Method> test;
+    private final List<Method> after;
 
     public TestStarter(String className) throws ClassNotFoundException {
         aClass = Class.forName(className);
@@ -27,9 +27,7 @@ public class TestStarter {
     public void run() {
         Method[] allMethods = aClass.getMethods();
         groupMethods(allMethods);
-        runTest(before);
-        runTest(test);
-        runTest(after);
+        runTest(this.before, this.test, this.after);
     }
 
     public void printResults() {
@@ -51,15 +49,19 @@ public class TestStarter {
         }
     }
 
-    private static void runTest(ArrayList<Method> methods) {
-        for(Method method : methods) {
+    private static void runTest(List<Method> before, List<Method> tests, List<Method> after) {
+        for(Method test : tests) {
             try {
-                Object newInstance = aClass.getDeclaredConstructors()[0].newInstance();
-                method.invoke(newInstance);
+                Object newInstance = aClass.getDeclaredConstructor().newInstance();
+                for(Method b : before) { b.invoke(newInstance);}
+                test.invoke(newInstance);
+                for(Method a : after) { a.invoke(newInstance); }
                 testPass++;
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
                 testFail++;
+            } catch (NoSuchMethodException e) {
+                throw new RuntimeException(e);
             }
         }
     }
