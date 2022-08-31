@@ -6,7 +6,6 @@ import ru.otus.atm.Response;
 import ru.otus.atmCassette.Cassette;
 import ru.otus.atmCassette.Slot;
 import ru.otus.enums.Denomination;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 

@@ -1,7 +1,6 @@
 package ru.otus.atm;
 
 import ru.otus.enums.Denomination;
-
 import java.util.EnumMap;
 
 public class Response {

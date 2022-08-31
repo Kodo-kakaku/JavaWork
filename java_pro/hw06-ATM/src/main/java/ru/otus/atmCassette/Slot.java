@@ -1,7 +1,6 @@
 package ru.otus.atmCassette;
 
 import ru.otus.enums.Denomination;
-
 import java.util.Objects;
 
 public class Slot implements Comparable<Slot> {
