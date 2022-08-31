@@ -4,7 +4,6 @@ import ru.otus.atmCassette.Cassette;
 import ru.otus.enums.Denomination;
 import ru.otus.atmCassette.Slot;
 
-
 public class AtmImpl implements Atm {
     private final Cassette cassette;
 

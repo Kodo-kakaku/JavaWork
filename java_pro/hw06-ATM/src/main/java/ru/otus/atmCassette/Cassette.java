@@ -3,7 +3,6 @@ package ru.otus.atmCassette;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-
 public class Cassette {
     private final SortedSet<Slot> storage;
 
