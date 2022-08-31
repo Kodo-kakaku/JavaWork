@@ -1,5 +1,6 @@
 package ru.otus.atm;
 
+
 import ru.otus.enums.Denomination;
 
 public interface Atm {
