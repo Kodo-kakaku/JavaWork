@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+dependencies {
+    implementation 'ch.qos.logback:logback-classic:1.2.11'
+    implementation 'org.flywaydb:flyway-core:9.3.0'
+    implementation 'org.postgresql:postgresql:42.4.1'
+    implementation 'com.zaxxer:HikariCP:4.0.3'
+}
