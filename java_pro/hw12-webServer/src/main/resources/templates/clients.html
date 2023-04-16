@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>HW</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+</head>
+
+<body>
+    <header class="bg-dark">
+        <div class="container pt-4 pt-xl-5">
+            <div class="row pt-5">
+                <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
+                    <div class="text-center">
+                        <form>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col-lg-7">
+                                    <p class="fw-bold text-success mb-2" style="font-size: 26px;color: rgb(25, 245, 170);">Добавить клиента</p>
+                                    <input class="form-control" type="text" id="clientNameTextBox" placeholder="Имя клиента">
+                                    <input class="form-control" type="text" id="clientPhoneTextBox" style="margin-top: 10px;" placeholder="Телефон клиента">
+                                    <input class="form-control" type="text" id="clientAddressTextBox" style="margin-top: 10px;" placeholder="Адрес клиента">
+                                    <a class="btn btn-primary" role="button" style="margin-top: 19px;" onclick="saveClient()">Сохранить</a>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+                        </form>
+                        <h1 class="fw-bold" style="margin-top: 20px;color: rgb(25, 245, 170);">Наши клиенты</h1>
+                        <div class="table-responsive" style="margin-top: 6px;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" style="text-align: center;">id</th>
+                                        <th class="text-center" style="text-align: center;">Имя</th>
+                                        <th class="text-center" style="text-align: center;">Телефон&nbsp;</th>
+                                        <th class="text-center" style="text-align: center;">Адрес</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <#list clients as client>
+                                <tr>
+                                    <td>${client.id}</td>
+                                    <td>${client.name}</td>
+                                    <td>${client.phone.phone}</td>
+                                    <td>${client.address.street}</td>
+                                </tr>
+                                </#list>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="py-5"></section>
+    <footer class="bg-dark"></footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/clientSaver.js"></script>
+</body>
+
+</html>
