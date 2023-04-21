@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+dependencies {
+    implementation("ch.qos.logback:logback-classic:1.4.5")
+    implementation("org.ehcache:ehcache:3.10.0")
+
+    implementation("org.hibernate:hibernate-core:5.4.24.Final")
+    implementation('org.flywaydb:flyway-core:9.15.1')
+
+    implementation("org.postgresql:postgresql:42.5.1")
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+}
