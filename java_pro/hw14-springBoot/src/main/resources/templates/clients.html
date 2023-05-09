@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clients</title>
+</head>
+<body>
+
+<h2>Найти по имени</h2>
+<form th:action="@{/client/search}" method="get">
+    <input type="text" name="name" th:value="${name}" placeholder="Find by Name" size="50" >
+    <button type="submit" class="btn btn-info" >Search</button>
+    <button type="submit" class="btn btn-info" >Reset</button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th> Id </th>
+        <th> Name </th>
+        <th> Phone </th>
+        <th> Address </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${clients.empty}">
+        <td colspan="2"> No clients </td>
+    </tr>
+    <tr th:each="client : ${clients}">
+        <td><span th:text="${client.id}"> Id </span></td>
+        <td><span th:text="${client.name}"> Имя </span></td>
+        <td><span th:text="${client.phone.phone}"> Телефон </span></td>
+        <td><span th:text="${client.address.street}"> Адрес </span></td>
+    </tr>
+    </tbody>
+</table>
+
+<form action="#" th:action="@{/client/save}" th:object="${client}" method="get">
+    <p><input type="submit" value="New client" />
+</form>
+
+</body>
+</html>
