@@ -13,8 +13,8 @@ import ru.otus.crm.model.Phone;
 import ru.otus.crm.service.DBServiceClient;
 import ru.otus.crm.service.DbServiceClientImpl;
 import ru.otus.helpers.FileSystemHelper;
-import ru.otus.server.UsersWebServer;
-import ru.otus.server.UsersWebServerWithBasicSecurity;
+import ru.otus.server.ClientWebServer;
+import ru.otus.server.ClientWebServerWithBasicSecurity;
 import ru.otus.services.TemplateProcessor;
 import ru.otus.services.TemplateProcessorImpl;
 
@@ -44,7 +44,7 @@ public class WebServerWithBasicSecurityDemo {
         String hashLoginServiceConfigPath = FileSystemHelper.localFileNameOrResourceNameToFullPath(HASH_LOGIN_SERVICE_CONFIG_NAME);
         LoginService loginService = new HashLoginService(REALM_NAME, hashLoginServiceConfigPath);
 
-        UsersWebServer usersWebServer = new UsersWebServerWithBasicSecurity(WEB_SERVER_PORT,
+        ClientWebServer usersWebServer = new ClientWebServerWithBasicSecurity(WEB_SERVER_PORT,
                 loginService, templateProcessor, serviceClient);
 
         usersWebServer.start();
